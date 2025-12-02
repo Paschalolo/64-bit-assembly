@@ -6,6 +6,10 @@ vpath %.o src
 vpath %.asm src 
 run : link 
 	./src/$(FILE) && rm src/$(FILE) && rm src/$(MFILE)
+run2: compilecpp
+	./src/$(FILE) && rm src/$(FILE) && rm src/$(MFILE)
+compilecpp: compile
+	g++-14 src/$(MFILE) src/$(FILE).cpp -o src/$(FILE)
 
 link :  compile 
 	ld  src/$(MFILE) -o src/$(FILE)
