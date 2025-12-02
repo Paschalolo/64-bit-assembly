@@ -1,5 +1,5 @@
-# HEllo to the world of 64 bit assembly 
+# HEllo world of 64 bit assembly 
 
 
 
-What is really going on in the sescret life of the computer system
+What is really going on in the secret life of the computer system
