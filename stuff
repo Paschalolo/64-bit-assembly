@@ -1,0 +1,70 @@
+NASM différences with MASM 
+
+
+
+
+
+Nasm literal variable name s
+
+
+
+MASM: Uses the PTR keyword (e.g., BYTE PTR, DWORD PTR).
+
+NASM: Does not use PTR; it just uses the size name.
+
+
+
+
+
+NASM: section .data, section .text
+
+
+
+
+
+Variable Declaration:
+
+MASM: varname DWORD 10
+NASM: varname dd 10 (Define Double)
+If your book uses .model flat, stdcall, option casemap, or proto, ignore them. These are specific to Microsoft's linker and memory models. NASM on Linux relies on the standard ELF format.
+
+/usr/bin/ld: warning: src/test.o: missing .note.GNU-stack section implies executable stack
+/usr/bin/ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+/usr/bin/ld: src/test.o: warning: relocation in read-only section `.text'
+/usr/bin/ld: warning: creating DT_TEXTREL in a PIE
+
+
+
+nasm -f elf64 program.asm -o program.o
+
+Link: ld program.o -o program
+
+Run: ./program
+
+
+
+TOOLS 
+constant defined as 
+<name> eq <value> 
+
+DATA SECTION 
+<variable name >  <dataType> <initial value > 
+db 8 bit 
+dw 16bit 
+dd 32 bits 
+dq 64 bits 
+ddq 128 bits 
+dt -> float 
+
+
+Examples oof constant and data sections which defines initialized vairaqble 
+bVar db 10 ; byte variable 
+cVar db "H" ; single character 
+strng db "HELLO World" ; string 
+wvar dw 5000 ; 16 bit variable 
+dVar dd 500000 ; 32 bit varaible 
+arr dd  100, 200 , 300 ; 3 elements in an array 
+flt1 dd 3.14159 ; 32 bit float 
+qVar dq 10000000000 ; 64 bit vairaible
+
+
