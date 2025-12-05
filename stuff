@@ -67,4 +67,22 @@ arr dd  100, 200 , 300 ; 3 elements in an array
 flt1 dd 3.14159 ; 32 bit float 
 qVar dq 10000000000 ; 64 bit vairaible
 
+BSS SECTION 
+<vairable name > <restype> <count> 
 
+unintialized data -> bss section 
+resb -> 8bit 
+resw -> 16 bit 
+resd -> 32 bits 
+resq -> 64 bits 
+resdq -> 128 btis 
+
+examples of reserve
+bArr resb 10; 10 element byte arrays 
+wArr resw 50 ; 50 word elemnet arraays 
+dArr resd 100 ; 100 element double array 
+qArr resq 200; 200 elemt of quad array ; 
+
+.TEXT section 
+this contains code of the executable file 
+i.e global _start 

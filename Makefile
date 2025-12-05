@@ -4,6 +4,8 @@ ASMFILE=$(FILE).asm
 COMPILEASM.o = nasm -f elf64
 vpath %.o src 
 vpath %.asm src 
+r : link 
+	./src/$(FILE) 
 run : link 
 	./src/$(FILE) && rm src/$(FILE) && rm src/$(MFILE)
 run2: compilecpp
