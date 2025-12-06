@@ -1,7 +1,8 @@
 MFILE=$(FILE).o
 ASMFILE=$(FILE).asm
 # nasm -f elf64 program.asm -o program.o
-COMPILEASM.o = nasm -f elf64
+COMPILEASM.o = nasm -f elf64 -g 
+COMPILEYASM.o = yasm -g dwarf2 -felf64
 vpath %.o src 
 vpath %.asm src 
 r : link 
@@ -16,7 +17,10 @@ compilecpp: compile
 link :  compile 
 	ld  src/$(MFILE) -o src/$(FILE)
 compile: $(ASMFILE)
-	$(COMPILEASM.o) $< -o src/$(MFILE)
+	$(COMPILEASM.o) $< -o src/$(MFILE) -l src/${FILE}.lst
+compileyas: $(ASMFILE)
+	$(COMPILEYASM.o) $< -o src/$(MFILE) -l src/${FILE}.lst
+	
 
 clean : 
 	rm src/$(FILE) && rm src/$(MFILE)

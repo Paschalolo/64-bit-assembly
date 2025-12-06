@@ -1,0 +1,75 @@
+     1                                  ; Simple program demonstrating program format and layout 
+     2                                  ; Author : Ahanmisi Paschal 
+     3                                  ; Date : July 18, 2022
+     4                                  
+     5                                  ; ******************************************************
+     6                                  ; Some basic data decleration 
+     7                                  
+     8                                  ; Define constants 
+     9                                  SECTION .bss ; FOr uninitialized data 
+    10                                  SECTION .data ; For initialized data 
+    11                                      EXIT_SUCCESS equ 0; succesful operations 
+    12                                      SYS_exit equ 60; call code to terminate 
+    13                                  
+    14                                      ; Byte (8-bit ) vairable decleratiosn 
+    15 00000000 11                          bVar1  db 17 ; 
+    16 00000001 09                          bVar2 db 9 ; 
+    17 00000002 00                          bResult db 0 ; 
+    18                                  
+    19                                      ;----------
+    20                                      ; Word (16-bit) vairable decleration 
+    21 00000003 6842                        wVar1 dw 17000 ; 
+    22 00000005 2823                        wvar2 dw 9000; 
+    23 00000007 0000                        wResult dw 0 ; 
+    24                                  
+    25                                  
+    26                                      ;-------------
+    27                                      ; Word (16-bit) vaiarble decleration 
+    28 00000009 40660301                    dVar1 dd 17000000; 
+    29 0000000D 40548900                    dVar2 dd 9000000; 
+    30 00000011 00000000                    dResult dd 0 ; 
+    31                                  
+    32                                      ; ----------
+    33                                      ; quadword (b4-bit ) vairible 
+    34 00000015 006A47F503000000            qvar1 dq 17000000000 ; 
+    35 0000001D 001A711802000000            qVar2 dq 9000000000;
+    36 00000025 0000000000000000            qResult dq 0 ; 
+    37                                  SECTION .text ; FOr code data 
+    38                                      global _start 
+    39                                  
+    40                                  _start: 
+    41                                      ; Perform a series of very basic addition operations to demonstarate 
+    42                                      ; a basic program format 
+    43                                      ; byte exampe 
+    44                                  
+    45                                      ; bResult = bVar1 + bvar2;
+    46 00000000 8A0425[00000000]            mov al , byte[bVar1];
+    47 00000007 020425[01000000]            add al, byte[bVar2];
+    48 0000000E 880425[02000000]            mov byte[bResult] , al ; move the result of the addtion to bResult 
+    49                                  
+    50                                      ; Word example 
+    51 00000015 668B0425[03000000]          mov ax , word[wVar1]; mov wVar1 to ax 
+    52 0000001D 66030425[05000000]          add ax , word[wvar2]; add al + wVar2
+    53 00000025 66890425[07000000]          mov word[wResult], ax ; mov result to wResult 
+    54                                  
+    55                                      ; Double word example 
+    56                                  
+    57 0000002D 8B0425[09000000]            mov eax , dword[dVar1]; move dVar1 to eax 
+    58 00000034 030425[0D000000]            add eax , dword[dVar2]; add eax + dVar2
+    59 0000003B 890425[11000000]            mov dword[dResult], eax ; mov result to dResult 
+    60                                  
+    61                                      ; Quadword example 
+    62                                  
+    63 00000042 488B0425[15000000]          mov rax , qword[qvar1]; move qvar1 to rax 
+    64 0000004A 48030425[1D000000]          add rax , qword[qVar2]; add rax to qvar 2 
+    65 00000052 48890425[25000000]          mov qword[qResult], rax ; put result in qResult 
+    66                                  
+    67                                  
+    68                                  
+    69                                      ;Done terminating the process 
+    70                                  
+    71                                  
+    72                                      ; sysycall to end ; 
+    73 0000005A B83C000000                  mov rax , SYS_exit ; mov syscall number to rax 
+    74 0000005F BF00000000                  mov rdi , EXIT_SUCCESS; 
+    75 00000064 0F05                        syscall; CALL SYSCALL TO SYS_EXIT 
