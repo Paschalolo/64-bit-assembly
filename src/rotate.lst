@@ -1,0 +1,13 @@
+     1                                    
+     2                                    
+     3                                  SECTION .text 
+     4                                      global  unint64_rotate
+     5                                  
+     6                                  unint64_rotate:
+     7 00000000 4088F1                      mov cl , sil
+     8 00000003 48D3C7                      rol rdi , cl 
+     9 00000006 4889F8                      mov rax , rdi 
+    10                                      ; -------- return ------------------; 
+    11 00000009 C3                          ret;
+    12                                  
+    13                                  SECTION .note.GNU-stack noalloc noexec nowrite progbits
