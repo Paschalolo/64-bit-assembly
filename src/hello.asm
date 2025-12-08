@@ -1,5 +1,7 @@
 ; dISCARD DUMP FILE 
 ; DO NOT OPEN NOT FOR USE 
+
+; SEGMENTATION FAILIURE ON THIS CODE 
 SECTION .data 
     bVal db 0;
     bNum db 42 
