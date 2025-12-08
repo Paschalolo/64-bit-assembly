@@ -70,3 +70,31 @@ SECTION .data
     mov 
     ; dec -> decremetn count 
 
+
+    ; Multipl
+    bNUmA db 42 
+    bNumB db 73 
+    wAns dw 0 
+    wAns1 dw 0 
+
+    wNumA dw 4321 
+    wNumB dw 1234 
+    dAns2 dd 0 
+
+    dNumA dd 4200000
+    dNUmB dd 7300000
+    qAns3 dq 0 
+
+    qNumA dq 7500000000
+    qNumB dq 2302301039
+    dqAns4 ddq 0 
+
+    mov al , byte[bNUmA];
+    mul al ; 
+    mov word[wAns1], ax 
+
+    mov rax , qword[qNumA];
+    mul qword[qNumB] ;
+    mul qword[dqAns4], rax 
+    mul qword[dqAns4 + 8 ] , rdx ; 
+    mov word[wAns1], ax 
