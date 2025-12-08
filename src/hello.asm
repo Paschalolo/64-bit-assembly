@@ -121,5 +121,10 @@ SECTION .data
 
     mov ax , 0 ; 
 
-    // Logiacal opersators xor , and  or 
+    // Logiacal opersators xor , and  or not operations for not logiacal operations 
+
+    not bx ; 
+    not rdx ; 
+    not dword[dNum]
+    not qword[qNum]
     
