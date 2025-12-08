@@ -127,4 +127,17 @@ SECTION .data
     not rdx ; 
     not dword[dNum]
     not qword[qNum]
+
+
+    shl ax , 8 ;
+    shl rcx , 32 
+    shl eax , cl 
+    shl qword[qNum], cl 
+
+    shr ax , 8 
+    shr rcx , 32 
+    shr eax , cl 
+    shr qword[qNum], cl 
+    rol -> rotate bits to the left 
+    ror -> rotate bits to the right 
     
