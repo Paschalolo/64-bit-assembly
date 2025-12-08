@@ -98,3 +98,23 @@ SECTION .data
     mul qword[dqAns4], rax 
     mul qword[dqAns4 + 8 ] , rdx ; 
     mov word[wAns1], ax 
+
+// signed multiplication 
+    imul <source>
+    imul <dest> , <src> 
+
+    ; div and idiv 
+
+    bNumA db 63 ; 
+    bNumB db 17 ; 
+    bNumC db 5 ; 
+    bAns1 db 0 
+    bAns2 db 0 
+    bRem2 db 0 ; 
+    bAns3 db 0 ; 
+
+    mov al , byte[bNuma]; 
+    mov ah , 0 
+    mov bl , 3 
+    div bl ; 
+    mov byte[bAns] , al;
