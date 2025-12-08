@@ -118,3 +118,8 @@ SECTION .data
     mov bl , 3 
     div bl ; 
     mov byte[bAns] , al;
+
+    mov ax , 0 ; 
+
+    // Logiacal opersators xor , and  or 
+    
