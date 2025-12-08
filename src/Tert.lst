@@ -1,0 +1,28 @@
+     1                                  ; Name : Tert 
+     2                                  ; Executable file : Assembly 
+     3                                  ; Author : Paschal Ahanmisi 
+     4                                  ; Date : 22-3-2022
+     5                                  
+     6                                  
+     7                                  SECTION .data 
+     8 00000000 0F00000000000000            lpCnt dq 15 
+     9 00000008 0000000000000000            sum dq 0 
+    10                                  SECTION .bss 
+    11                                  SECTION .text
+    12                                      global _start 
+    13                                  
+    14                                  
+    15                                  _start : 
+    16 00000000 488B0C25[00000000]          mov rcx , qword[lpCnt]
+    17 00000008 B801000000                  mov rax , 1 
+    18                                  sumLoop : 
+    19 0000000D 48010425[08000000]          add qword[sum], rax
+    20 00000015 4883C002                    add rax , 2 
+    21 00000019 48FFC9                      dec rcx 
+    22 0000001C 4883F900                    cmp rcx , 0 
+    23 00000020 75EB                        jne sumLoop
+    24                                  end : 
+    25                                      ; function to exit terminate 
+    26 00000022 B83C000000                  mov rax , 60 ; sys_exit function to be called 
+    27 00000027 BF00000000                  mov rdi ,0 ; excutable to return no function 
+    28 0000002C 0F05                        syscall ;

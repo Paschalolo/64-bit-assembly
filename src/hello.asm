@@ -162,4 +162,37 @@ SECTION .data
     ; ja -> if above cmp 
     ; jbe -> jump below or equal 
     ; jae -> jump if above or equal 
+
+    ; Test cage 
+
+    mov rax , qword[currNum]
+    cmp rax , qword[MyMax]
+    jle notNewMax; 
+    mov qword[myMax] , rax 
+notNewMax: 
+
+SECTION .data 
+    TRUE equ 1 
+    FALSE equ 0 
+    x dd 0 
+    y dd 0 
+    ans dd 0 
+    errFlg db FALSE
+
+go: 
+    cmp dword[x] , o 
+    je doELse
+    mov eax , dword[x]
+    cdq 
+    idiv dword[y]
+    mov dword[ans], eax
+    mov byte[errFlg], FALSE 
+    jmp skpElse
+example1 :
+    cmp rax , 0 
+    je endofloop
+    jmp example1
+endofloop:
+doELse: 
+skpElse: 
     
