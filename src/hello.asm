@@ -141,3 +141,23 @@ SECTION .data
     rol -> rotate bits to the left 
     ror -> rotate bits to the right 
     
+
+
+    ; loopStart :  
+    ; last : 
+    jmp <label> 
+    jmp startLoop
+    jmp ifDone 
+    jmp last -> unconditional jump 
+    ; Unconditional Jumps 
+    ; je -> jump equal 
+    ; jne -> jump not equal 
+    ; jl -> jump if less 
+    ; jle -> jump if less or equal 
+    ; jg -> jump greater 
+    ; jge -> jump greater or equal 
+    ; jb -> if bellow cmp 
+    ; ja -> if above cmp 
+    ; jbe -> jump below or equal 
+    ; jae -> jump if above or equal 
+    
