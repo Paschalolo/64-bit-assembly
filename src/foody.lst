@@ -1,0 +1,24 @@
+     1                                  ; Executable : Foody 
+     2                                  ; Author : Paschal Ahanmisi
+     3                                  
+     4                                  
+     5                                  SECTION .bss ; section for unitializede data
+     6                                  SECTION .data ; section for initialized data 
+     7 00000000 48656C6C6F20636F6D-     	MY_TEXT db "Hello coming home", 10 ; text to print to screen 
+     7 00000009 696E6720686F6D650A 
+     8                                  	MY_TEXT_LEN equ $-MY_TEXT ; count of the size of text
+     9                                  SECTION .text ; section for code data 
+    10                                  	global _start 
+    11                                  _start : 
+    12                                  	; ---- making system call to system write ---------
+    13 00000000 B801000000              	mov rax , 0X01 ; syscall write number 
+    14 00000005 BF01000000              	mov rdi , 0X01 ; making the call to standard output 
+    15 0000000A 48BE-                   	mov rsi , MY_TEXT ; location of char buffer for text 
+    15 0000000C [0000000000000000] 
+    16 00000014 BA12000000              	mov rdx , MY_TEXT_LEN ; size of the string 
+    17 00000019 0F05                    	syscall ; call sycall to sys_write
+    18                                   
+    19                                  	; ---- making system call to system terminate --------
+    20 0000001B B83C000000              	mov rax , 0x3C; call the sys_exit function
+    21 00000020 BF00000000              	mov rdi , 0X00 ; call no erro on exit  
+    22 00000025 0F05                    	syscall ; sys_terminate 
