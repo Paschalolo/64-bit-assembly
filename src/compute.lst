@@ -1,0 +1,33 @@
+     1                                  ; SUM OF SQAURE OF A LOOP 
+     2                                  ; AUthor : Paschal Ahanmisi 
+     3                                  
+     4                                  
+     5                                  section .data 
+     6                                   ; ------------
+     7                                   ; Define constants 
+     8                                      SUCCESS equ 0 ; succesful operation 
+     9                                      SYS_exit equ 60 ; call code for terminate 
+    10                                  
+    11                                      ; define data 
+    12 00000000 0A000000                    n dd 10 
+    13 00000004 0000000000000000            sumOfSquares dq 0 
+    14                                  
+    15                                  
+    16                                  section .text
+    17                                      global _start 
+    18                                  
+    19                                  _start: 
+    20 00000000 BB01000000                  mov rbx , 1 ; i 
+    21 00000005 8B0C25[00000000]            mov ecx , dword[n]
+    22                                  SumLoop:
+    23 0000000C 4889D8                      mov rax , rbx 
+    24 0000000F 48F7E0                      mul rax 
+    25 00000012 48010425[04000000]          add qword[sumOfSquares], rax 
+    26 0000001A 48FFC3                      inc rbx
+    27 0000001D 4883FB0A                    cmp rbx , 10
+    28 00000021 75E9                        jne SumLoop
+    29                                  last :  
+    30 00000023 B83C000000                  mov rax , SYS_exit
+    31 00000028 BF00000000                  mov rdi  , SUCCESS
+    32 0000002D 0F05                        syscall 
+    33                                      
