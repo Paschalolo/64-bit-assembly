@@ -1,0 +1,66 @@
+     1                                  ; Executable : Address 
+     2                                  ; Date : 20-2-23
+     3                                  ; Author : Pascahl Ahanmisi
+     4                                  ; simple example fo the sum and averga efor a list of numbers  
+     5                                  SECTION .data ; initialized datad 
+     6                                  	; Define constraints -----------
+     7                                  	EXIT_SUCCES equ 0  ; ; succesful operation
+     8                                  	SYS_EXIT equ 60 ; call for terminate opeation
+     9                                  ;       Define date 
+    10 00000000 EA030000EC030000EE-     	lst dd 1002,1004,1006,1008,100010
+    10 00000009 030000F0030000AA86-
+    10 00000012 0100               
+    11 00000014 05000000                	len dd 5
+    12 00000018 00000000                	sum dd 0 
+    13                                  	; ************************************************
+    14                                  	 
+    15                                  SECTION .text ; code
+    16                                  	global _start ; entry point for the linker 
+    17                                  
+    18                                  _start : 
+    19                                  ; Examples of code 
+    20                                  ; mov rax , qword[var1] ; value of var1 in rax 
+    21                                  ; mov rax , var1 ; value of address var1 in rax 
+    22                                  ; sometimes specifications are needed 
+    23                                  ; inc [rax] ; error 
+    24                                  ; inc byte[rbx] 
+    25                                  ; inc word[rbx]
+    26                                  ; inc dword[rbx]
+    27                                  
+    28                                  ; register mode addressing
+    29                                  ; mov eax . ebx 
+    30                                  ; both eax and ebx are in register addressing mode
+    31                                  
+    32                                  ; immediate addressing mode 
+    33                                  ; mov eax , 123 
+    34                                  ; mov eax , 0X12345678
+    35                                  
+    36                                  ; register mode addressing
+    37                                  ; mov rax , qword[qNum]
+    38                                  
+    39                                  ; mov eax dword[lst] 
+    40                                  ; accesing the elemts using base displacemnet or values 
+    41                                  ; mov rax , lst
+    42                                  ; mov rsi , 8 
+    43                                  
+    44                                  ; mov eax , dword[lst+8]
+    45                                  ; mov eax , dword[rax + rsi] 
+    46                                  ; mov wax , dword[rax + 8]
+    47                                  
+    48 00000000 8B0C25[14000000]        	mov ecx , dword[len] ; get length value 
+    49 00000007 BE00000000              	mov rsi, 0; 
+    50                                  	
+    51                                  sumLoop: 	
+    52 0000000C 8B04B5[00000000]        	mov eax , dword[lst+ (rsi * 4)] ; get lst[rsi]
+    53 00000013 010425[18000000]        	add dword[sum] , eax ; update sum 
+    54 0000001A 48FFC6                  	inc rsi ; 
+    55 0000001D E2ED                    	loop sumLoop
+    56                                  ; -----------------
+    57                                  ; Done terminate program 
+    58                                  
+    59                                  last : 
+    60 0000001F B83C000000              	mov rax , SYS_EXIT; call code for exit 
+    61 00000024 BF00000000              	mov rdi , EXIT_SUCCES ; exit with success 
+    62 00000029 0F05                    	syscall 
+    63                                  
+    64                                  
