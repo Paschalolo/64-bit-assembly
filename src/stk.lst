@@ -1,0 +1,52 @@
+     1                                  ; Name : stk 
+     2                                  ; Author : Pascahl Ahanmsisi 
+     3                                   ; Stackking 
+     4                                  SECTION .bss 
+     5                                  SECTION .data
+     6                                  	EXIT_SUCCESS equ 0 ; succesful operation 
+     7                                  	SYS_exit equ 60 ; call code for terminate 
+     8                                  
+     9                                  	; Define data 
+    10 00000000 79000000000000007A-     	numbers dq  121 , 122, 123, 124 ,125 
+    10 00000009 000000000000007B00-
+    10 00000012 0000000000007C0000-
+    10 0000001B 00000000007D000000-
+    10 00000024 00000000           
+    11 00000028 0500000000000000        	len dq 5 ; length is equal to five 
+    12                                  	; ******************************************************************
+    13                                  
+    14                                  SECTION .text 
+    15                                  	global _start 
+    16                                  _start : 
+    17                                  ; Loop to put numbers on the stack 
+    18 00000000 488B0C25[00000000]      	mov rcx , qword[numbers]
+    19 00000008 48BB-                   	mov rbx , numbers 
+    19 0000000A [0000000000000000] 
+    20 00000012 41BC00000000            	mov r12 , 0 
+    21 00000018 B800000000              	mov  rax , 0 
+    22                                  pushLoop:
+    23 0000001D 42FF34E3                	push qword[rbx+ r12 * 8]; 
+    24 00000021 49FFC4                  	inc r12 ; 
+    25 00000024 4983FC05                	cmp r12 , 5 
+    26 00000028 75F3                    	jne pushLoop
+    27                                  
+    28                                  	; All numbers are on the stack(in revrse order ) loop to get tehm back off , put them back into the original list 
+    29                                  
+    30 0000002A 488B0C25[28000000]      	mov rcx , qword[len]
+    31 00000032 48BB-                   	mov rbx , numbers 
+    31 00000034 [0000000000000000] 
+    32 0000003C 41BC00000000            	mov r12, 0 
+    33                                  popLoop: 
+    34 00000042 58                      	pop rax 
+    35 00000043 4A8904E3                	mov qword[rbx + r12*8] , rax 
+    36 00000047 49FFC4                  	inc r12 
+    37 0000004A 4983FC05                	cmp r12 , 5 
+    38 0000004E 75F2                    	jne popLoop
+    39                                  	;Done terminate program 
+    40                                  
+    41                                  ; syscall to terminate 
+    42                                  Exit : 
+    43 00000050 B83C000000              	mov rax , SYS_exit 
+    44 00000055 BF00000000              	mov rdi , EXIT_SUCCESS 
+    45 0000005A 0F05                    	syscall ; make system terminate call 
+    46                                  	
