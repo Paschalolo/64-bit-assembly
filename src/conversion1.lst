@@ -1,0 +1,74 @@
+     1                                  ; Name : Pascahal Ahanmsisi 
+     2                                  ; Executable : conversion1 
+     3                                  ; Simple aprogram to convert to ascii character 
+     4                                  
+     5                                  bits 64
+     6                                  SECTION .bss ; section for uninitalized data 
+     7 00000000 <res 32h>               	strNum resb 50 
+     8                                  SECTION .data  ; section for initialized data
+     9                                  	NULL equ 0 
+    10                                  	EXIT_SUCCESS equ 0 ; succesful operation 
+    11                                  	SYS_exit equ 60 ; code for termination 
+    12                                  
+    13                                  	; Define data
+    14 00000000 546865726520617265-     	TextAb db "There are numbers : "
+    14 00000009 206E756D6265727320-
+    14 00000012 3A20               
+    15                                  	TextAbLen equ $-TextAb
+    16 00000014 DA050000                	intNum dd 1498
+    17                                  SECTION .text ; section for code data
+    18                                  	global _start 
+    19                                  _start : 
+    20                                  	; comnvert an interger to a ASCII string 
+    21                                  	; __ 
+    22                                  	; PARt A ;  succesive divisiom 
+    23 00000000 8B0425[14000000]        	mov eax , dword[intNum]; get integer value 
+    24 00000007 B900000000              	mov  rcx , 0 ; digit count 
+    25 0000000C BB0A000000              	mov ebx , 10 ; set for divign by 10 
+    26                                  
+    27                                  divideLoop: 
+    28 00000011 BA00000000              	mov edx , 0 
+    29 00000016 F7F3                    	div ebx ; divide number by 10 
+    30                                  
+    31 00000018 52                      	push rdx ; push remainder to stack 
+    32 00000019 48FFC1                  	inc rcx ; imcremnet digit count 
+    33                                  
+    34 0000001C 83F800                  	cmp eax , 0 
+    35 0000001F 75F0                    	jne divideLoop 
+    36                                  
+    37                                  	; Part B conver remainders to store 
+    38 00000021 48BB-                   	mov rbx , strNum ; get addr of string 
+    38 00000023 [0000000000000000] 
+    39 0000002B BF00000000              	mov rdi , 0 ; idx 0
+    40 00000030 48BE-                   	mov rsi , TextAb
+    40 00000032 [0000000000000000] 
+    41 0000003A BA14000000              	mov rdx , TextAbLen
+    42                                  
+    43                                  WriteString : 
+    44 0000003F 8A043E                  	mov al  , byte[rsi+rdi] 
+    45 00000042 88043B                  	mov byte[rbx + rdi], al 
+    46 00000045 48FFC7                  	inc rdi 
+    47 00000048 4839FA                  	cmp rdx, rdi 
+    48 0000004B 75F2                    	jne WriteString
+    49 0000004D 4883C701                	add rdi , 1  
+    50                                  popLoop: 
+    51 00000051 58                      	pop rax ; pop intDigit 
+    52 00000052 0430                    	add al , "0"
+    53 00000054 88043B                  	mov byte[rbx+rdi] , al ; string is equal to character 
+    54 00000057 48FFC7                  	inc rdi
+    55 0000005A E2F5                    	loop popLoop
+    56 0000005C C6043B00                	mov byte[rbx + rdi ] , NULL
+    57                                  
+    58                                  Read : 	
+    59 00000060 B801000000              	mov rax , 0X01
+    60 00000065 BF01000000              	mov rdi , 1
+    61 0000006A 48BE-                   	mov rsi , strNum
+    61 0000006C [0000000000000000] 
+    62 00000074 BA28000000              	mov rdx , 40
+    63 00000079 0F05                    	syscall 
+    64                                  Exit : 
+    65                                  	; Terminate function 
+    66 0000007B B83C000000              	mov rax , SYS_exit 
+    67 00000080 BF00000000              	mov rdi, 0 
+    68 00000085 0F05                    	syscall 
+    69                                  

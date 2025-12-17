@@ -21,11 +21,22 @@ SECTION .text ; section taht contains the code
 _start : 
 	mov r12 , 9; 
 
+
 : conversion using table look up and writing function 
 Write : 	
 	mov rax , 0X01 ; syscall for write function 
-	mov rdi , 1, 
-	mov rsi , 
+	mov rdi , FinalMessage  
+	mov rsi ,  Message
+	mov rdx , Messagelen
+	syscall ; 
+	mov rax , ASCII_TABLE
+	mov r10 , byte[rax + r12 * 1]
+
+	mov rax , 0X01 ; syscall for write function                                               
+        mov rdi , FinalMessage + MessageLen                                                       
+        mov rsi ,  Message                                                                       
+	mov rdx , Messagelen   
+	syscall ; 
 
 ; termination of the program 
 Exit : 
